@@ -9,10 +9,6 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/items/{item_id}")
-def get_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
-
 
 @app.get("/items/next_item")
 def get_next_item():
