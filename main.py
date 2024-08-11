@@ -14,7 +14,7 @@ def get_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
 
 
-@app.get("items/next_item")
+@app.get("/items/next_item")
 def get_next_item():
     # currently gets a random entruy from the mock_items list
     random_item: dict = get_random_item()
