@@ -70,7 +70,7 @@ async def get_next_suggested_item():
     pipeline = [{"$sample": {"size": 1}}]
     item = await student_collection.aggregate(pipeline).to_list(1)
     if item:
-        return ItemModel(**item)
+        return ItemModel(**item[0])
     raise Exception("No items found")
 
 
