@@ -67,8 +67,11 @@ async def list_items():
 @app.get("/items/next", response_description="Get next item",
          response_model=ItemModel, response_model_by_alias=False)
 async def get_next_suggested_item():
-    item = await student_collection.find_one()
-    return ItemModel(**item)
+    pipeline = [{"$sample": {"size": 1}}]
+    item = await student_collection.aggregate(pipeline).to_list(1)
+    if item:
+        return ItemModel(**item)
+    raise Exception("No items found")
 
 
 @app.get("/")
